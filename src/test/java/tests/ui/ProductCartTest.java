@@ -1,4 +1,4 @@
-package tests;
+package tests.ui;
 
 import config.TestConfig;
 import org.junit.jupiter.api.BeforeEach;

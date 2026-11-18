@@ -1,4 +1,4 @@
 package models;
 
-public record BookingDates() {
+public record BookingDates(String checkin, String checkout) {
 }

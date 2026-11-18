@@ -1,7 +1,6 @@
-package api;
+package clients;
 
 import config.TestConfig;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import models.Booking;
@@ -12,8 +11,8 @@ public class BookingClient {
     private static RequestSpecification request() {
         return given()
                 .baseUri(TestConfig.API_BASE_URL)
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON);
+                .contentType("application/json")
+                .accept("application/json");
     }
 
     public Response createBooking(Booking booking) {

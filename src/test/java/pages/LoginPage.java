@@ -7,12 +7,14 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class LoginPage {
+    private static final String PATH = "/";
+
     private final SelenideElement usernameInput = $(byTestId("username"));
     private final SelenideElement passwordInput = $(byTestId("password"));
     private final SelenideElement loginButton = $(byTestId("login-button"));
 
     public LoginPage openPage() {
-        open("/");
+        open(PATH);
         return this;
     }
 

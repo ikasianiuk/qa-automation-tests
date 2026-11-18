@@ -14,6 +14,7 @@ public class ProductsPage {
 
     private final SelenideElement title = $(byTestId("title"));
     private final SelenideElement sortDropdown = $(byTestId("product-sort-container"));
+    private final Header header = new Header();
 
     private final ElementsCollection products = $$(byTestId("inventory-item"));
     private final ElementsCollection prices = $$(byTestId("inventory-item-price"));
@@ -37,16 +38,18 @@ public class ProductsPage {
         return titles;
     }
 
-    public ProductsPage sortBy(String optionValue) {
+    public void sortBy(String optionValue) {
         sortDropdown.selectOptionByValue(optionValue);
-        return this;
     }
 
     public String addFirstProductToCart() {
         SelenideElement firstProduct = products.first();
         String firstProductName = firstProduct.$(byTestId("inventory-item-name")).getText();
-        System.out.println(firstProductName);
         firstProduct.$("button[data-test^='add-to-cart']").click();
         return firstProductName;
+    }
+
+    public Header header() {
+        return header;
     }
 }

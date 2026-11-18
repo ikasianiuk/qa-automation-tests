@@ -7,7 +7,7 @@ import pages.ProductsPage;
 
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 
-public class LoginTest {
+public class LoginTest extends BaseUiTest {
     @Test
     void userCanLogInAndSeeProductsPage() {
         ProductsPage productsPage = new LoginPage()

@@ -16,7 +16,7 @@ public class BookingApiTest {
     private static Booking bookingWithFirstname(String firstname) {
         return new Booking(
                 firstname, "Brown", 111, true,
-                new BookingDates("2026-01-01", "2026-01-10"),
+                new BookingDates("2027-01-01", "2027-01-10"),
                 "Breakfast");
     }
 
@@ -45,12 +45,11 @@ public class BookingApiTest {
         assertEquals(404, response.statusCode());
     }
 
+    // The docs mark firstname as required but don't define the error status;
+    // the API currently answers 500, so we only assert that the request is rejected.
     @Test
-        // The docs mark firstname as required but don't define the error status;
-        // the API currently answers 500, so we only assert that the request is rejected.
     void bookingWithoutFirstnameIsRejected() {
         Booking booking = bookingWithFirstname(null);
-
 
         Response response = bookingClient.createBooking(booking);
 

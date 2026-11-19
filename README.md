@@ -84,15 +84,15 @@ src/test/resources
 | `ProductCartTest.productsSortedCorrectly` | Parameterized: all four sort options order the list correctly (bonus). |
 | `BookingApiTest.createdBookingCanBeRetrievedById` | `POST /booking`, extract the id, `GET /booking/{id}`, and compare every field (names, price, deposit, dates, additional needs). |
 | `BookingApiTest.nonExistingBookingReturnsNotFound` | An unknown booking id returns 404 (bonus). |
-| `BookingApiTest.bookingWithoutFirstnameIsRejected` | A booking without the required `firstname` is rejected (bonus). |
+| `BookingApiTest.bookingWithoutFirstnameIsRejected` | A booking with `firstname` set to `null` (sent as `"firstname":null`) is rejected (bonus). The API also returns 500 when the field is omitted entirely. |
 
 ### Locators
 
-SauceDemo exposes `data-test` attributes meant for automation. They do not change with styling, layout or language, so the tests use them (Selenide's `byTestId`, configured with `selenide.test-id.attribute=data-test`). There is no XPath and no index-based selection. The add-to-cart button is found inside the product card, which is scoped to that product.
+SauceDemo exposes `data-test` attributes meant for automation. They do not change with styling, layout or language, so the tests use them (Selenide's `byTestId`, configured with `selenide.test-id.attribute=data-test`). There is no XPath. The add-to-cart button is found inside the product card, so the lookup is scoped to that product. The cart test adds the first product in the list on purpose, since any product proves the flow.
 
 ### Synchronization
 
-There are no `Thread.sleep` calls and no manual waits. Selenide elements are lazy and its `should...` assertions retry until the condition is met or the timeout (6 s, set in `selenide.properties`) runs out. Page objects expose a `shouldBeOpened()` check that waits for the URL and a visible title. The tests do not assert on visible text such as "Products", so a translated page does not break them.
+There are no `Thread.sleep` calls and no manual waits. Selenide elements are lazy and its `should...` assertions retry until the condition is met or the timeout (6 s, set in `selenide.properties`) runs out. `ProductsPage` has a `shouldBeOpened()` check that waits for the URL and a visible title. The cart page is verified by the retrying assertion on its items. The tests do not assert on visible text such as "Products", so a translated page does not break them.
 
 ### UI structure
 
